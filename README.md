@@ -1,6 +1,6 @@
 # filetransfer
 
-A flutter project for transfer files from one phone to another
+A flutter project for transfer files from one phone to another phone over wifi connection. 
 
 ## Getting Started
 
