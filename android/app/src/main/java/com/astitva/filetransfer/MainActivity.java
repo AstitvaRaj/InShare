@@ -38,7 +38,15 @@ public class MainActivity extends FlutterActivity {
                             }else if (call.method.equals("getapkpath")) {
                                 HashMap<String, String> installedApkFilePathss = getAllInstalledApkFiles(context);
                                 result.success(installedApkFilePathss);
-                            }else  if (call.method.equals("getapk")){
+                            }else if(call.method.equals("sendfile")){
+                                send i = new send();
+                                String path = call.argument("path");
+                                System.out.println("Path recieved by native: "+path);
+                                i.setpath(path);
+                                Thread thread = new Thread(new send());
+                                thread.start();
+                            }
+                            else  if (call.method.equals("getapk")){
                                 String s =call.argument("packages");
                                 File apkfile = getApkFile(context,s);
                                 result.success(apkfile);
@@ -49,6 +57,7 @@ public class MainActivity extends FlutterActivity {
                         }
                 );
     }
+
     private HashMap<String, String> getAllInstalledApkFiles(Context context) {
 
 
@@ -77,13 +86,9 @@ public class MainActivity extends FlutterActivity {
         return  installedApkFilePaths;
 
     }
-
-
     private boolean isValid(List<PackageInfo> packageInfos) {
         return packageInfos != null && !packageInfos.isEmpty();
     }
-
-
     private ApplicationInfo getApplicationInfoFrom(PackageManager packageManager, PackageInfo packageInfo) {
         return packageInfo.applicationInfo;
     }

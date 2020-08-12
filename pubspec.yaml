@@ -25,9 +25,7 @@ dependencies:
     sdk: flutter
   qr_flutter: ^3.2.0
   qrcode: ^1.0.4
-  path_provider: ^1.6.11
-  path:
-  intl:
+  file_picker:
 
 
   # The following adds the Cupertino Icons font to your application.

@@ -1,3 +1,4 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:filetransfer/recieve.dart';
 import 'package:filetransfer/send.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,8 +14,6 @@ class _homepageState extends State<homepage> {
   @override
    void initState() {
     super.initState();
-    temp.getapkpath;
-
   }
   @override
   Widget build(BuildContext context) {
@@ -23,6 +22,7 @@ class _homepageState extends State<homepage> {
     SystemChrome.setEnabledSystemUIOverlays([]);
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
+    String filepath="";
     return Scaffold(
       drawer: Container(
         height:  height,
@@ -44,7 +44,6 @@ class _homepageState extends State<homepage> {
               ),
               GestureDetector(
                 onTap:(){
-                  temp.getapkpath;
                 } ,
                 child: Text('Profile',
                 style: TextStyle(
@@ -61,7 +60,6 @@ class _homepageState extends State<homepage> {
         decoration: BoxDecoration(
           color: Colors.black,
         ),
-
         child: SafeArea(
           child: Container(
             child: Column(
@@ -89,6 +87,32 @@ class _homepageState extends State<homepage> {
                     width: width,
                     decoration: BoxDecoration(
 
+                    ),
+                    child: Center(
+                      child: Row(
+                        children: <Widget>[
+                          FlatButton(
+                            child: Text('Select file',style: TextStyle(color: Colors.white),),
+                            onPressed: () async{
+                              Future <String> getfilepath= FilePicker.getFilePath();
+                              setState(() async{
+                                filepath =await  getfilepath;
+                                print('$filepath');
+                              });
+                            },
+                          ),
+                          FlatButton(
+                            child: Text('Send file',style: TextStyle(color: Colors.white),),
+                            onPressed: ()async{
+                              MethodChannel m = MethodChannel("filetransfer");
+                              m.invokeMethod("sendfile",<String,dynamic>{
+                                "path":filepath
+                              });
+
+                            },
+                          ),
+                        ],
+                      ),
                     ),
 
 
@@ -225,7 +249,6 @@ class _homepageState extends State<homepage> {
                             ),
                           ),
                           onTap: (){
-                            temp.getapkpath;
                             Navigator.push(context, MaterialPageRoute(
                                 builder: (context)=>rec())
                             );

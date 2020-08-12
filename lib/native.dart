@@ -1,4 +1,3 @@
-import 'dart:html';
 import 'package:flutter/services.dart';
 import 'dart:async';
 const MethodChannel _channel = const MethodChannel("filetransfer");
@@ -13,9 +12,5 @@ class temp{
     final Map m = await _channel.invokeMethod("getapkpath");
     print(m);
     return m;
-  }
-  static Future get getapk async{
-    File f = await _channel.invokeMethod("getapk",{"packages":"hello"});
-    return f;
   }
 }
