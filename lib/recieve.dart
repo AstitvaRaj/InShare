@@ -1,3 +1,4 @@
+import 'package:filetransfer/transfer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:qrcode/qrcode.dart';
@@ -17,8 +18,14 @@ class _recState extends State<rec> {
     _captureController.onCapture((data) {
       setState(() {
         p=data;
+        Navigator.pop(context);
+        Navigator.push(context, MaterialPageRoute(
+            builder: (context)=>trans(filepathss: p,)
+        ));
+
       });
       print('onCapture----$data');
+
     });
   }
   @override

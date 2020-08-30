@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 class senddata extends StatefulWidget {
+  @required
+  senddata({Key key,this.filepath}):super(key:key);
+  String filepath = "";
   @override
   _senddataState createState() => _senddataState();
 }
@@ -26,7 +29,7 @@ class _senddataState extends State<senddata> {
                   padding: EdgeInsets.only(top: 20,bottom: 50),
                   child: Center(
                     child: Text(
-                      'Scan To Connect',
+                      widget.filepath,
                       style: TextStyle(
                         fontSize: 25,
                         color: Colors.white
@@ -41,7 +44,7 @@ class _senddataState extends State<senddata> {
                     padding: EdgeInsets.all(15),
                     backgroundColor: Colors.white,
                     foregroundColor: Colors.black,
-                    data: 'Astitva Raj',
+                    data: widget.filepath,
                     version: 7,
                     size: 350,
                     gapless: true,

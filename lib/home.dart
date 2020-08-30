@@ -90,6 +90,7 @@ class _homepageState extends State<homepage> {
                     ),
                     child: Center(
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           FlatButton(
                             child: Text('Select file',style: TextStyle(color: Colors.white),),
@@ -194,9 +195,13 @@ class _homepageState extends State<homepage> {
                             ),
                           ),
                           onTap: (){
-
+                            MethodChannel m = MethodChannel("filetransfer");
+                            m.invokeMethod("sendfile",<String,dynamic>{
+                              "path":filepath
+                            });
                             Navigator.push(context, MaterialPageRoute(
-                                builder: (context)=>senddata())
+                                builder: (context)=>senddata(filepath: filepath,)
+                              )
                             );
                           },
                         ),
